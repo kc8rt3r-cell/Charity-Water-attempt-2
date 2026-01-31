@@ -15,11 +15,19 @@ To keep your preview consistent, use a fixed local port whenever you edit:
 1. Open a terminal in this project folder
 2. Run this command:
    ```bash
-   python3 -m http.server 4173
+   python3 -m http.server 3000
    ```
-3. Open your browser to: `http://localhost:4173`
+3. Open your browser to: `https://urban-telegram-r49p6596xq56fpj4r-3000.app.github.dev/`
 
-From now on, always use port **4173** for local previews so your workflow stays consistent.
+From now on, use the website link above so your workflow stays consistent.
+
+#### Troubleshooting: 403 errors
+If you see a `403 Forbidden` while trying to open the link, it's usually because:
+- A proxy in your environment blocks the `app.github.dev` domain.
+- The preview server isn't running on port **3000**.
+- You're not signed in to GitHub in the browser you're using.
+
+**Fix:** keep the `python3 -m http.server 3000` process running and open the link in a GitHub-authenticated browser session. If you're working locally without browser access to the `app.github.dev` domain, use `http://localhost:3000` instead.
 
 ---
 
