@@ -23,13 +23,33 @@
 
     <!-- MAIN CONTENT AREA -->
     <main class="page">
+        <section class="jerry-feature">
+            <div class="jerry-box">
+                <img
+                    id="jerryCanImage"
+                    class="jerry-image"
+                    src="img/jerry_can_black.png"
+                    alt="Jerry can illustration"
+                >
+            </div>
+
+            <div class="jerry-actions" aria-label="Choose how to get involved">
+                <button class="jerry-action" type="button" data-jerry-image="img/jerry_can_white.png">
+                    Donate
+                </button>
+                <button class="jerry-action" type="button" data-jerry-image="img/jerry_can_yellow.png">
+                    Volunteer
+                </button>
+            </div>
+        </section>
+
         <section id="hero" class="hero">
             <div class="hero-media">
                 <img
                     id="heroImage"
                     class="hero-image"
-                    src="img/default.jpg"
-                    alt="Smiling community members celebrating clean water"
+                    src="img/jerry_can_black.png"
+                    alt="Jerry can illustration"
                 >
             </div>
 
@@ -42,15 +62,15 @@
                 </p>
 
                 <div id="options" class="option-grid">
-                    <button class="option-card is-active" type="button" data-image="img/option1.jpg">
+                    <button class="option-card is-active" type="button" data-image="img/jerry_can_black.png">
                         <span class="option-title">Well Restoration</span>
                         <span class="option-text">Repair and protect existing water points.</span>
                     </button>
-                    <button class="option-card" type="button" data-image="img/option2.jpg">
+                    <button class="option-card" type="button" data-image="img/jerry_can_white.png">
                         <span class="option-title">New Boreholes</span>
                         <span class="option-text">Build reliable water sources that last.</span>
                     </button>
-                    <button class="option-card" type="button" data-image="img/option3.jpg">
+                    <button class="option-card" type="button" data-image="img/jerry_can_yellow.png">
                         <span class="option-title">Community Training</span>
                         <span class="option-text">Equip local leaders to manage systems.</span>
                     </button>
@@ -73,6 +93,9 @@
     <script>
         const heroImage = document.getElementById('heroImage');
         const optionCards = document.querySelectorAll('.option-card');
+        const jerryImage = document.getElementById('jerryCanImage');
+        const jerryActions = document.querySelector('.jerry-actions');
+        const jerryButtons = document.querySelectorAll('.jerry-action');
 
         optionCards.forEach((card) => {
             card.addEventListener('click', () => {
@@ -96,6 +119,23 @@
                 }, 200);
             });
         });
+
+        if (jerryImage && jerryActions) {
+            const defaultJerryImage = 'img/jerry_can_black.png';
+
+            jerryButtons.forEach((button) => {
+                button.addEventListener('mouseenter', () => {
+                    const nextImage = button.getAttribute('data-jerry-image');
+                    if (nextImage) {
+                        jerryImage.setAttribute('src', nextImage);
+                    }
+                });
+            });
+
+            jerryActions.addEventListener('mouseleave', () => {
+                jerryImage.setAttribute('src', defaultJerryImage);
+            });
+        }
     </script>
 </body>
 </html>
