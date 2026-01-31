@@ -53,15 +53,15 @@
                 </p>
 
                 <div id="options" class="option-grid">
-                    <button class="option-card is-active" type="button">
+                    <button class="option-card is-active" type="button" aria-pressed="true">
                         <span class="option-title">Well Restoration</span>
                         <span class="option-text">Repair and protect existing water points.</span>
                     </button>
-                    <button class="option-card" type="button">
+                    <button class="option-card" type="button" aria-pressed="false">
                         <span class="option-title">New Boreholes</span>
                         <span class="option-text">Build reliable water sources that last.</span>
                     </button>
-                    <button class="option-card" type="button">
+                    <button class="option-card" type="button" aria-pressed="false">
                         <span class="option-title">Community Training</span>
                         <span class="option-text">Equip local leaders to manage systems.</span>
                     </button>
@@ -91,23 +91,35 @@
             card.addEventListener('click', () => {
                 optionCards.forEach((button) => button.classList.remove('is-active'));
                 card.classList.add('is-active');
+                optionCards.forEach((button) => button.setAttribute('aria-pressed', 'false'));
+                card.setAttribute('aria-pressed', 'true');
             });
         });
 
         if (jerryImage && jerryActions) {
-            const defaultJerryImage = 'img/jerry_can_black.png';
+            const defaultJerryImage = jerryImage.getAttribute('src') || 'img/jerry_can_black.png';
 
             jerryButtons.forEach((button) => {
-                button.addEventListener('mouseenter', () => {
+                const updateJerryImage = () => {
                     const nextImage = button.getAttribute('data-jerry-image');
                     if (nextImage) {
                         jerryImage.setAttribute('src', nextImage);
                     }
-                });
+                };
+
+                button.addEventListener('mouseenter', updateJerryImage);
+                button.addEventListener('focus', updateJerryImage);
+                button.addEventListener('click', updateJerryImage);
             });
 
             jerryActions.addEventListener('mouseleave', () => {
                 jerryImage.setAttribute('src', defaultJerryImage);
+            });
+
+            jerryActions.addEventListener('focusout', (event) => {
+                if (!jerryActions.contains(event.relatedTarget)) {
+                    jerryImage.setAttribute('src', defaultJerryImage);
+                }
             });
         }
     </script>
