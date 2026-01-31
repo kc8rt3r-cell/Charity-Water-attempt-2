@@ -9,6 +9,18 @@ Welcome! This guide will help you customize your website without needing to know
 3. Edit it and save the file
 4. Open `index.html` in your web browser to see the changes
 
+### Permanent Preview Port (Recommended)
+To keep your preview consistent, use a fixed local port whenever you edit:
+
+1. Open a terminal in this project folder
+2. Run this command:
+   ```bash
+   python3 -m http.server 4173
+   ```
+3. Open your browser to: `http://localhost:4173`
+
+From now on, always use port **4173** for local previews so your workflow stays consistent.
+
 ---
 
 ## Editing the Text Content
