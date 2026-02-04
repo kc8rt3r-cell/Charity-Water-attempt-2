@@ -106,6 +106,7 @@
         let isHovering = false;
         let slideshowTimer;
         let isTransitioning = false;
+        const SLIDE_DELAY_MS = 4000;
 
         const swapImage = (src, altText) => {
             if (isTransitioning) return;
@@ -132,7 +133,7 @@
             slideshowTimer = setTimeout(() => {
                 showNextMainImage();
                 scheduleNextSlide();
-            }, 1000);
+            }, SLIDE_DELAY_MS);
         };
 
         const getNextVolunteerImage = () => {
