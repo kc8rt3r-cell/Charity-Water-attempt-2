@@ -16,8 +16,8 @@ body {
     font-family: 'Inter', sans-serif; /* Inter Medium */
     font-weight: 500;
     line-height: 1.6;    /* Space between text lines (improves readability) */
-    color: #333;         /* Dark gray text color */
-    background-color: #FEFAF1; /* Warm off-white background (R:254 G:250 B:241) */
+    color: #1f2a37;      /* Dark navy text color */
+    background-color: #f6f4ef; /* Warm off-white background */
 }
 
 /* HEADER - Top section of the page */
@@ -34,6 +34,7 @@ body {
     position: sticky;          /* Keep header visible at top */
     top: 0;
     z-index: 100;
+    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.08);
 }
 
 .header img {
@@ -212,6 +213,40 @@ body {
     height: 76px;
     padding: 10px 12px;
     background-color: black;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    border-radius: 999px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.button-primary {
+    background-color: #f97316;
+    color: #ffffff;
+    box-shadow: 0 12px 25px rgba(249, 115, 22, 0.35);
+}
+
+.button-secondary {
+    background-color: #ffffff;
+    color: #1f2a37;
+    border: 1px solid rgba(148, 163, 184, 0.6);
+    box-shadow: 0 10px 20px rgba(15, 23, 42, 0.08);
+}
+
+.button:hover {
+    transform: translateY(-1px);
 }
 
 /* FOOTER - Bottom section of the page */

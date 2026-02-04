@@ -4,8 +4,8 @@
     <!-- This section contains information about the page (not visible to visitors) -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>charity: water - Bringing Clean Water to the World</title> <!-- This appears in the browser tab -->
-    <link rel="stylesheet" href="styles.css?v=2"> <!-- This connects to the styling file -->
+    <title>My Website</title> <!-- This appears in the browser tab -->
+    <link rel="stylesheet" href="styles.css"> <!-- This connects to the styling file -->
 </head>
 <body>
     <!-- HEADER SECTION - Appears at the top of every page (includes navigation) -->
@@ -14,156 +14,77 @@
 
         <!-- NAVIGATION MENU - placed inside header -->
         <nav class="navigation">
-            <a href="#home" class="nav-link">Home</a>
-            <a href="#about" class="nav-link">About</a>
-            <a href="#services" class="nav-link">Services</a>
-            <a href="#contact" class="nav-link">Contact</a>
+            <a href="#hero" class="nav-link">Home</a>
+            <a href="#options" class="nav-link">Options</a>
+            <a href="#impact" class="nav-link">Impact</a>
         </nav>
     </header>
 
-    <!-- LEFT SIDE BOX -->
-    <div class="left-box">
-        <img src="img/images/Main image/20170302-IMG_6802-3.jpg" alt="Regular Image" class="left-box-image is-visible" id="leftBoxImage">
-        <img src="img/images/Main image/20170302-IMG_6802-3.jpg" alt="Regular Image" class="left-box-image" id="leftBoxImageNext">
-    </div>
+    <!-- MAIN CONTENT AREA -->
+    <main class="container">
+        <!-- HOME SECTION -->
+        <section id="home" class="section">
+            <h2>Welcome!</h2>
+            <p>
+                This is the home section of your website. You can replace this text with your own content.
+                Add as much text as you'd like here.
+            </p>
+            <p>
+                You can add multiple paragraphs. Each &lt;p&gt; tag creates a new paragraph.
+            </p>
+        </section>
 
-    <!-- YELLOW STRIP ABOVE TEXT BOX -->
-    <div class="top-strip"></div>
+        <!-- ABOUT SECTION -->
+        <section id="about" class="section">
+            <h2>About</h2>
+            <p>
+                Tell visitors about yourself, your business, or your project here.
+                Share your story and what makes you unique.
+            </p>
+            <ul>
+                <li>First key point</li>
+                <li>Second key point</li>
+                <li>Third key point</li>
+            </ul>
+        </section>
 
-    <!-- BLACK RECTANGLE ABOVE BUTTONS -->
-    <div class="top-rectangle">Changing the World One Sip at a Time!</div>
+        <!-- SERVICES/FEATURES SECTION -->
+        <section id="services" class="section">
+            <h2>Services</h2>
+            <p>Describe what you offer here:</p>
+            
+            <div class="card">
+                <h3>Service 1</h3>
+                <p>Describe your first service or feature here.</p>
+            </div>
 
-    <!-- ACTION BOXES -->
-    <div class="action-row">
-        <div class="center-box">
-            <img src="img/images/Logos/jerry_can_yellow.png" alt="Donate" class="center-box-image">
-            <span class="center-box-text">Donate!</span>
-        </div>
+            <div class="card">
+                <h3>Service 2</h3>
+                <p>Describe your second service or feature here.</p>
+            </div>
 
-        <div class="right-box">Volunteer!</div>
+            <div class="card">
+                <h3>Service 3</h3>
+                <p>Describe your third service or feature here.</p>
+            </div>
+        </section>
 
-        <div class="extra-box"></div>
-    </div>
+        <!-- CONTACT SECTION -->
+        <section id="contact" class="section">
+            <h2>Get In Touch</h2>
+            <p>I'd love to hear from you! Here's how you can contact me:</p>
+            <p>
+                <strong>Email:</strong> your.email@example.com<br>
+                <strong>Phone:</strong> (555) 123-4567<br>
+                <strong>Location:</strong> Your City, Your State
+            </p>
+        </section>
+    </main>
 
     <!-- FOOTER SECTION - Appears at the bottom of every page -->
     <footer class="footer">
-        <p>&copy; 2026 charity: water. All rights reserved.</p>
-        <p>Bringing clean water to everyone on the planet.</p>
-        <div class="social-icons" aria-label="Social media">
-            <a href="#" aria-label="YouTube">
-                <svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M23 7.5a3.2 3.2 0 0 0-2.2-2.3C19 4.7 12 4.7 12 4.7s-7 0-8.8.5A3.2 3.2 0 0 0 1 7.5 33 33 0 0 0 .5 12c0 1.5.2 3 .5 4.5a3.2 3.2 0 0 0 2.2 2.3c1.8.5 8.8.5 8.8.5s7 0 8.8-.5A3.2 3.2 0 0 0 23 16.5c.3-1.5.5-3 .5-4.5s-.2-3-.5-4.5ZM9.8 15.4V8.6L15.8 12l-6 3.4Z"/></svg>
-            </a>
-            <a href="#" aria-label="LinkedIn">
-                <svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5ZM3 9h4v12H3V9Zm7 0h3.8v1.6h.1c.5-1 1.8-2 3.8-2 4 0 4.7 2.6 4.7 6V21h-4v-5.2c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9V21h-4V9Z"/></svg>
-            </a>
-            <a href="#" aria-label="Snapchat">
-                <svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M12 3.5c2.6 0 4.7 2.1 4.7 4.7 0 .9-.1 1.5.2 2 .4.6 1.2.7 1.6 1 .5.3.9.7.8 1.2-.2.7-1.2.9-2 1.2-.6.2-1.2.4-1.4.9-.2.6.1 1.3.4 1.9.2.4.4.8.4 1.1 0 .7-.8 1-1.7 1.2-.8.2-1.7.3-2.3.8-.4.3-.7.8-1.7.8s-1.3-.5-1.7-.8c-.6-.5-1.5-.6-2.3-.8-.9-.2-1.7-.5-1.7-1.2 0-.3.2-.7.4-1.1.3-.6.6-1.3.4-1.9-.2-.5-.8-.7-1.4-.9-.8-.3-1.8-.5-2-1.2-.1-.5.3-.9.8-1.2.4-.3 1.2-.4 1.6-1 .3-.5.2-1.1.2-2 0-2.6 2.1-4.7 4.7-4.7Z"/></svg>
-            </a>
-            <a href="#" aria-label="Instagram">
-                <svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4Zm10 2H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2Zm-5 3.5A4.5 4.5 0 1 1 7.5 13 4.5 4.5 0 0 1 12 8.5Zm0 2A2.5 2.5 0 1 0 14.5 13 2.5 2.5 0 0 0 12 10.5ZM17.5 7.8a1 1 0 1 1-1-1 1 1 0 0 1 1 1Z"/></svg>
-            </a>
-            <a href="#" aria-label="Facebook">
-                <svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M13 9h3V6h-3c-2.2 0-4 1.8-4 4v2H7v3h2v6h3v-6h3l1-3h-4v-2c0-.6.4-1 1-1Z"/></svg>
-            </a>
-            <a href="#" aria-label="Twitter">
-                <svg viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M21.5 7.3c-.6.3-1.2.5-1.9.6.7-.4 1.2-1 1.4-1.8-.6.4-1.3.7-2.1.9A3.2 3.2 0 0 0 13.3 9c0 .3 0 .6.1.9-2.7-.1-5-1.4-6.6-3.4-.3.5-.4 1-.4 1.6 0 1.1.6 2.1 1.5 2.6-.5 0-1-.2-1.4-.4 0 1.6 1.1 2.9 2.6 3.2-.3.1-.6.1-.9.1-.2 0-.4 0-.6-.1.4 1.3 1.6 2.2 3 2.2A6.4 6.4 0 0 1 3 18.3a9 9 0 0 0 4.9 1.4c5.9 0 9.1-4.9 9.1-9.1v-.4c.6-.4 1.2-1 1.6-1.6Z"/></svg>
-            </a>
-        </div>
+        <p>&copy; 2026 My Website. All rights reserved.</p>
+        <p>Made with care for the web.</p>
     </footer>
-
-    <script>
-        const leftBoxImage = document.getElementById('leftBoxImage');
-        const leftBoxImageNext = document.getElementById('leftBoxImageNext');
-        const donateBox = document.querySelector('.center-box');
-        const volunteerBox = document.querySelector('.right-box');
-
-        const mainImages = [
-            'img/images/Main image/20170302-IMG_6802-3.jpg',
-            'img/images/Main image/4800_Ethiopia_2019_CG-.jpg',
-            'img/images/Main image/4832_Ethiopia_2019_CG-.jpg',
-            'img/images/Main image/4920_Ethiopia_2019_CG-.jpg',
-            'img/images/Main image/7255_Ethiopia_2019_CG-.jpg',
-            'img/images/Main image/JS_20170301_033622_preview.jpg',
-            'img/images/Main image/JS_20170804_3915.jpg',
-            'img/images/Main image/Madagascar_2019_CG-2726.jpg',
-            'img/images/Main image/Madagascar_2019_CG-3510.jpg',
-            'img/images/Main image/Madagascar_2019_CG-3793.jpg',
-            'img/images/Main image/Madagascar_2019_CG-4322.jpg',
-            'img/images/Main image/Rwanda-2018-march-cw-cubbygraham-1299-2.jpg',
-            'img/images/Main image/Zimbabwe_2022_CG-7466.jpg',
-            'img/images/Main image/charity_water_Tanzania_TaraShupePhotography_0258.jpg'
-        ];
-
-        const volunteerImages = [
-            'img/images/Volunteer images/0207_Ethiopia_2019_CG-V3.jpg',
-            'img/images/Volunteer images/8439_Ethiopia_2019_CG-V4.jpg',
-            'img/images/Volunteer images/9229_Ethiopia_2019_CG-V2.jpg',
-            'img/images/Volunteer images/Zimbabwe_2022_CG-9389 V1.jpg'
-        ];
-
-        let currentMainIndex = 0;
-        let currentVolunteerIndex = 0;
-        let isHovering = false;
-        let slideshowTimer;
-        let isTransitioning = false;
-
-        const swapImage = (src, altText) => {
-            if (isTransitioning) return;
-            isTransitioning = true;
-            leftBoxImageNext.src = src;
-            leftBoxImageNext.alt = altText;
-            leftBoxImageNext.classList.add('wipe-in');
-            leftBoxImageNext.addEventListener('animationend', () => {
-                leftBoxImage.src = src;
-                leftBoxImage.alt = altText;
-                leftBoxImageNext.classList.remove('wipe-in');
-                isTransitioning = false;
-            }, { once: true });
-        };
-
-        const showNextMainImage = () => {
-            if (isHovering) return;
-            swapImage(mainImages[currentMainIndex], 'Main Image');
-            currentMainIndex = (currentMainIndex + 1) % mainImages.length;
-        };
-
-        const scheduleNextSlide = () => {
-            clearTimeout(slideshowTimer);
-            slideshowTimer = setTimeout(() => {
-                showNextMainImage();
-                scheduleNextSlide();
-            }, 1000);
-        };
-
-        const getNextVolunteerImage = () => {
-            const image = volunteerImages[currentVolunteerIndex];
-            currentVolunteerIndex = (currentVolunteerIndex + 1) % volunteerImages.length;
-            return image;
-        };
-
-        scheduleNextSlide();
-
-        donateBox.addEventListener('mouseenter', () => {
-            isHovering = true;
-            swapImage('img/images/Logos/jerry_can_yellow.png', 'Donate Image');
-        });
-
-        donateBox.addEventListener('mouseleave', () => {
-            isHovering = false;
-            swapImage(mainImages[currentMainIndex], 'Main Image');
-            scheduleNextSlide();
-        });
-
-        volunteerBox.addEventListener('mouseenter', () => {
-            isHovering = true;
-            swapImage(getNextVolunteerImage(), 'Volunteer Image');
-        });
-
-        volunteerBox.addEventListener('mouseleave', () => {
-            isHovering = false;
-            swapImage(mainImages[currentMainIndex], 'Main Image');
-            scheduleNextSlide();
-        });
-    </script>
 </body>
 </html>
