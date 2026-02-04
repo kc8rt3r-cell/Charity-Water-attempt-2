@@ -76,6 +76,7 @@
         const leftBoxImageNext = document.getElementById('leftBoxImageNext');
         const donateBox = document.querySelector('.center-box');
         const volunteerBox = document.querySelector('.right-box');
+        const actionRow = document.querySelector('.action-row');
 
         const mainImages = [
             'img/images/Main image/20170302-IMG_6802-3.jpg',
@@ -103,29 +104,70 @@
 
         let currentMainIndex = 0;
         let currentVolunteerIndex = 0;
-        let isHovering = false;
+        let hoverTarget = null;
         let slideshowTimer;
+        let volunteerTimer;
         let isTransitioning = false;
+        let pendingSwap = null;
         const SLIDE_DELAY_MS = 4000;
+        const VOLUNTEER_DELAY_MS = 4000;
+
+        const applyHorizontalSizing = (img) => {
+            if (!img.complete || img.naturalWidth === 0) return;
+            img.classList.toggle('is-horizontal', img.naturalWidth > img.naturalHeight);
+        };
+
+        const startWipeTransition = () => {
+            leftBoxImageNext.classList.remove('wipe-in');
+            void leftBoxImageNext.offsetWidth;
+            leftBoxImageNext.classList.add('wipe-in');
+        };
 
         const swapImage = (src, altText) => {
-            if (isTransitioning) return;
+            if (isTransitioning) {
+                pendingSwap = { src, altText };
+                return;
+            }
             isTransitioning = true;
             leftBoxImageNext.src = src;
             leftBoxImageNext.alt = altText;
-            leftBoxImageNext.classList.add('wipe-in');
+            startWipeTransition();
+            leftBoxImageNext.addEventListener('load', () => {
+                applyHorizontalSizing(leftBoxImageNext);
+            }, { once: true });
             leftBoxImageNext.addEventListener('animationend', () => {
                 leftBoxImage.src = src;
                 leftBoxImage.alt = altText;
+                applyHorizontalSizing(leftBoxImage);
                 leftBoxImageNext.classList.remove('wipe-in');
                 isTransitioning = false;
+                if (pendingSwap) {
+                    const nextSwap = pendingSwap;
+                    pendingSwap = null;
+                    swapImage(nextSwap.src, nextSwap.altText);
+                }
             }, { once: true });
         };
 
         const showNextMainImage = () => {
-            if (isHovering) return;
+            if (hoverTarget) return;
             swapImage(mainImages[currentMainIndex], 'Main Image');
             currentMainIndex = (currentMainIndex + 1) % mainImages.length;
+        };
+
+        const getRandomMainIndex = (excludeIndex) => {
+            if (mainImages.length <= 1) return 0;
+            let nextIndex = excludeIndex;
+            while (nextIndex === excludeIndex) {
+                nextIndex = Math.floor(Math.random() * mainImages.length);
+            }
+            return nextIndex;
+        };
+
+        const showRandomMainImage = () => {
+            const nextIndex = getRandomMainIndex(currentMainIndex);
+            swapImage(mainImages[nextIndex], 'Main Image');
+            currentMainIndex = (nextIndex + 1) % mainImages.length;
         };
 
         const scheduleNextSlide = () => {
@@ -142,27 +184,61 @@
             return image;
         };
 
+        const startVolunteerSlideshow = () => {
+            clearInterval(volunteerTimer);
+            volunteerTimer = setInterval(() => {
+                if (hoverTarget !== 'volunteer') return;
+                swapImage(getNextVolunteerImage(), 'Volunteer Image');
+            }, VOLUNTEER_DELAY_MS);
+        };
+
+        const stopVolunteerSlideshow = () => {
+            clearInterval(volunteerTimer);
+        };
+
+        applyHorizontalSizing(leftBoxImage);
+        applyHorizontalSizing(leftBoxImageNext);
         scheduleNextSlide();
 
+        const isMovingToActionBox = (event) => {
+            const nextTarget = event.relatedTarget;
+            if (!nextTarget) return false;
+            return donateBox.contains(nextTarget) || volunteerBox.contains(nextTarget);
+        };
+
         donateBox.addEventListener('mouseenter', () => {
-            isHovering = true;
+            hoverTarget = 'donate';
+            clearTimeout(slideshowTimer);
             swapImage('img/images/Logos/jerry_can_yellow.png', 'Donate Image');
         });
 
-        donateBox.addEventListener('mouseleave', () => {
-            isHovering = false;
-            swapImage(mainImages[currentMainIndex], 'Main Image');
+        donateBox.addEventListener('mouseleave', (event) => {
+            if (isMovingToActionBox(event)) return;
+            hoverTarget = null;
+            showRandomMainImage();
             scheduleNextSlide();
         });
 
         volunteerBox.addEventListener('mouseenter', () => {
-            isHovering = true;
+            hoverTarget = 'volunteer';
+            clearTimeout(slideshowTimer);
             swapImage(getNextVolunteerImage(), 'Volunteer Image');
+            startVolunteerSlideshow();
         });
 
-        volunteerBox.addEventListener('mouseleave', () => {
-            isHovering = false;
-            swapImage(mainImages[currentMainIndex], 'Main Image');
+        volunteerBox.addEventListener('mouseleave', (event) => {
+            if (isMovingToActionBox(event)) return;
+            hoverTarget = null;
+            stopVolunteerSlideshow();
+            showRandomMainImage();
+            scheduleNextSlide();
+        });
+
+        actionRow.addEventListener('mouseleave', () => {
+            if (!hoverTarget) return;
+            hoverTarget = null;
+            stopVolunteerSlideshow();
+            showRandomMainImage();
             scheduleNextSlide();
         });
     </script>
