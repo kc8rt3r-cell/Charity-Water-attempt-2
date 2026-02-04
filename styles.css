@@ -77,7 +77,7 @@ body {
 .left-box {
     position: absolute;
     left: 50px;         /* Moved to the right */
-    top: 50%;           /* Center vertically */
+    top: calc(50% + 20px);           /* Center vertically */
     transform: translateY(-50%); /* Center adjustment */
     width: 580px;
     height: 580px;      /* Larger square */
@@ -146,11 +146,11 @@ body {
 .top-rectangle {
     position: absolute;
     left: calc((100% + 650px) / 2); /* Center between image right edge and screen right edge */
-    top: calc(50% - 160px); /* Move lower */
+    top: calc(50% - 160px + 20px); /* Move lower */
     transform: translateX(-50%);
     width: 700px;
     height: 80px;
-    background-color: black;
+    background-color: #003366;
     border-radius: 20px;
     z-index: 60;
     display: flex;
@@ -180,12 +180,19 @@ body {
     z-index: 50;
 }
 
+.action-row .center-box,
+.action-row .right-box,
+.action-row .extra-box {
+    width: 200px;
+    height: 76px;
+}
+
 .center-box {
     position: relative;
-    width: 160px;
+    width: 200px;
     height: 76px;
     padding: 10px 12px;
-    background-color: black;
+    background-color: #003366;
     border-radius: 20px;
     display: flex;
     flex-direction: row;
@@ -195,7 +202,7 @@ body {
 }
 
 .center-box:hover {
-    background-color: #ffffff;
+    background-color: #77A8BB;
 }
 
 .center-box:hover .center-box-text {
@@ -219,10 +226,10 @@ body {
 /* RIGHT BOX */
 .right-box {
     position: relative;
-    width: 160px;
+    width: 200px;
     height: 76px;
     padding: 10px 12px;
-    background-color: black;
+    background-color: #003366;
     border-radius: 20px;
     color: white;       /* White text on black background */
     font-size: 20px;    /* Slightly smaller text */
@@ -242,17 +249,17 @@ body {
 }
 
 .right-box:hover {
-    background-color: #ffffff;
+    background-color: #77A8BB;
     color: #1f2a37;
 }
 
 /* EXTRA BOX */
 .extra-box {
     position: relative;
-    width: 160px;
+    width: 200px;
     height: 76px;
     padding: 10px 12px;
-    background-color: black;
+    background-color: #003366;
     border-radius: 20px;
     display: flex;
     align-items: center;
@@ -274,7 +281,7 @@ body {
 }
 
 .extra-box:hover {
-    background-color: #ffffff;
+    background-color: #77A8BB;
 }
 
 .extra-box:hover .extra-box-text {
@@ -321,7 +328,7 @@ body {
     color: #2c3e50;           /* Dark text for contrast */
     text-align: center;
     padding: 30px 20px;
-    margin-top: 800px;
+    margin-top: 2400px;
     border-top: 3px solid #fdc300; /* Charity water yellow accent */
 }
 
