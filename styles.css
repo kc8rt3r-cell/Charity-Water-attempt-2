@@ -12,7 +12,7 @@
 }
 
 :root {
-    --yellow-strip-height: 380px;
+    --yellow-strip-height: 460px;
 }
 
 /* BODY - Main page background and text */
@@ -102,6 +102,7 @@ body {
     object-fit: contain; /* Show full image without cropping */
     display: block;
     border-radius: 2px;
+    opacity: 0;
 }
 
 .left-box-image.is-horizontal {
@@ -112,10 +113,12 @@ body {
 
 .left-box-image.is-visible {
     z-index: 1;
+    opacity: 1;
 }
 
 .left-box-image.wipe-in {
     z-index: 2;
+    opacity: 1;
     animation: wipeIn 1.2s ease-in-out forwards;
     clip-path: inset(0 100% 0 0);
 }
@@ -167,12 +170,13 @@ body {
 .action-row {
     position: absolute;
     left: calc((100% + 650px) / 2); /* Align with top text box */
-    top: calc(50% + 20px);
+    top: calc(50% - 160px + 110px);
     transform: translateX(-50%);
-    width: 540px; /* Slightly narrower row */
+    width: 160px;
     display: flex;
+    flex-direction: column;
     gap: 16px;
-    justify-content: space-between;
+    align-items: center;
     z-index: 50;
 }
 
@@ -242,6 +246,23 @@ body {
     padding: 10px 12px;
     background-color: black;
     border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.extra-box-image {
+    width: 54px;
+    height: 54px;
+    display: block;
+}
+
+.extra-box-text {
+    color: white;
+    font-size: 20px;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
 }
 
 .hero-actions {

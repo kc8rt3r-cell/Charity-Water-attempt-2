@@ -42,7 +42,10 @@
 
         <div class="right-box">Volunteer!</div>
 
-        <div class="extra-box"></div>
+        <div class="extra-box">
+            <img src="img/images/1F4D6.svg" alt="Open Book" class="extra-box-image">
+            <span class="extra-box-text">There Story!</span>
+        </div>
     </div>
 
     <!-- FOOTER SECTION - Appears at the bottom of every page -->
@@ -83,15 +86,18 @@
             'img/images/Main image/4800_Ethiopia_2019_CG-.jpg',
             'img/images/Main image/4832_Ethiopia_2019_CG-.jpg',
             'img/images/Main image/4920_Ethiopia_2019_CG-.jpg',
-            'img/images/Main image/7255_Ethiopia_2019_CG-.jpg',
-            'img/images/Main image/JS_20170301_033622_preview.jpg',
             'img/images/Main image/JS_20170804_3915.jpg',
             'img/images/Main image/Madagascar_2019_CG-2726.jpg',
             'img/images/Main image/Madagascar_2019_CG-3510.jpg',
             'img/images/Main image/Madagascar_2019_CG-3793.jpg',
             'img/images/Main image/Madagascar_2019_CG-4322.jpg',
             'img/images/Main image/Rwanda-2018-march-cw-cubbygraham-1299-2.jpg',
-            'img/images/Main image/Zimbabwe_2022_CG-7466.jpg',
+            'img/images/Main image/Zimbabwe_2022_CG-7466.jpg'
+        ];
+
+        const donateImages = [
+            'img/images/Main image/7255_Ethiopia_2019_CG-.jpg',
+            'img/images/Main image/JS_20170301_033622_preview.jpg',
             'img/images/Main image/charity_water_Tanzania_TaraShupePhotography_0258.jpg'
         ];
 
@@ -104,17 +110,29 @@
 
         let currentMainIndex = 0;
         let currentVolunteerIndex = 0;
+        let currentDonateIndex = 0;
         let hoverTarget = null;
         let slideshowTimer;
         let volunteerTimer;
+        let donateTimer;
         let isTransitioning = false;
         let pendingSwap = null;
+        let lastMainIndex = 0;
+        let prevMainIndex = 0;
         const SLIDE_DELAY_MS = 4000;
         const VOLUNTEER_DELAY_MS = 4000;
+        const DONATE_DELAY_MS = 4000;
 
         const applyHorizontalSizing = (img) => {
             if (!img.complete || img.naturalWidth === 0) return;
             img.classList.toggle('is-horizontal', img.naturalWidth > img.naturalHeight);
+        };
+
+        const preloadImages = (sources) => {
+            sources.forEach((src) => {
+                const img = new Image();
+                img.src = src;
+            });
         };
 
         const startWipeTransition = () => {
@@ -124,6 +142,7 @@
         };
 
         const swapImage = (src, altText) => {
+            if (leftBoxImage.src.endsWith(src)) return;
             if (isTransitioning) {
                 pendingSwap = { src, altText };
                 return;
@@ -131,10 +150,14 @@
             isTransitioning = true;
             leftBoxImageNext.src = src;
             leftBoxImageNext.alt = altText;
-            startWipeTransition();
-            leftBoxImageNext.addEventListener('load', () => {
+            const startSwap = () => {
                 applyHorizontalSizing(leftBoxImageNext);
-            }, { once: true });
+                startWipeTransition();
+            };
+            leftBoxImageNext.addEventListener('load', startSwap, { once: true });
+            if (leftBoxImageNext.complete) {
+                startSwap();
+            }
             leftBoxImageNext.addEventListener('animationend', () => {
                 leftBoxImage.src = src;
                 leftBoxImage.alt = altText;
@@ -152,21 +175,25 @@
         const showNextMainImage = () => {
             if (hoverTarget) return;
             swapImage(mainImages[currentMainIndex], 'Main Image');
+            prevMainIndex = lastMainIndex;
+            lastMainIndex = currentMainIndex;
             currentMainIndex = (currentMainIndex + 1) % mainImages.length;
         };
 
-        const getRandomMainIndex = (excludeIndex) => {
-            if (mainImages.length <= 1) return 0;
-            let nextIndex = excludeIndex;
-            while (nextIndex === excludeIndex) {
+        const getRandomMainIndex = (excludeIndices) => {
+            if (mainImages.length <= 2) return 0;
+            let nextIndex = excludeIndices[0];
+            while (excludeIndices.includes(nextIndex)) {
                 nextIndex = Math.floor(Math.random() * mainImages.length);
             }
             return nextIndex;
         };
 
         const showRandomMainImage = () => {
-            const nextIndex = getRandomMainIndex(currentMainIndex);
+            const nextIndex = getRandomMainIndex([lastMainIndex, prevMainIndex]);
             swapImage(mainImages[nextIndex], 'Main Image');
+            prevMainIndex = lastMainIndex;
+            lastMainIndex = nextIndex;
             currentMainIndex = (nextIndex + 1) % mainImages.length;
         };
 
@@ -184,6 +211,12 @@
             return image;
         };
 
+        const getNextDonateImage = () => {
+            const image = donateImages[currentDonateIndex];
+            currentDonateIndex = (currentDonateIndex + 1) % donateImages.length;
+            return image;
+        };
+
         const startVolunteerSlideshow = () => {
             clearInterval(volunteerTimer);
             volunteerTimer = setInterval(() => {
@@ -196,6 +229,21 @@
             clearInterval(volunteerTimer);
         };
 
+        const startDonateSlideshow = () => {
+            clearInterval(donateTimer);
+            donateTimer = setInterval(() => {
+                if (hoverTarget !== 'donate') return;
+                swapImage(getNextDonateImage(), 'Donate Image');
+            }, DONATE_DELAY_MS);
+        };
+
+        const stopDonateSlideshow = () => {
+            clearInterval(donateTimer);
+        };
+
+        preloadImages(mainImages);
+        preloadImages(volunteerImages);
+        preloadImages(donateImages);
         applyHorizontalSizing(leftBoxImage);
         applyHorizontalSizing(leftBoxImageNext);
         scheduleNextSlide();
@@ -209,12 +257,15 @@
         donateBox.addEventListener('mouseenter', () => {
             hoverTarget = 'donate';
             clearTimeout(slideshowTimer);
-            swapImage('img/images/Logos/jerry_can_yellow.png', 'Donate Image');
+            stopVolunteerSlideshow();
+            swapImage(getNextDonateImage(), 'Donate Image');
+            startDonateSlideshow();
         });
 
         donateBox.addEventListener('mouseleave', (event) => {
             if (isMovingToActionBox(event)) return;
             hoverTarget = null;
+            stopDonateSlideshow();
             showRandomMainImage();
             scheduleNextSlide();
         });
@@ -222,6 +273,7 @@
         volunteerBox.addEventListener('mouseenter', () => {
             hoverTarget = 'volunteer';
             clearTimeout(slideshowTimer);
+            stopDonateSlideshow();
             swapImage(getNextVolunteerImage(), 'Volunteer Image');
             startVolunteerSlideshow();
         });
@@ -230,6 +282,7 @@
             if (isMovingToActionBox(event)) return;
             hoverTarget = null;
             stopVolunteerSlideshow();
+            stopDonateSlideshow();
             showRandomMainImage();
             scheduleNextSlide();
         });
@@ -238,6 +291,7 @@
             if (!hoverTarget) return;
             hoverTarget = null;
             stopVolunteerSlideshow();
+            stopDonateSlideshow();
             showRandomMainImage();
             scheduleNextSlide();
         });
